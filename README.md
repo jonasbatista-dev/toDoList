@@ -40,7 +40,7 @@ git clone https://github.com/jonasbatista-dev/toDoList.git
 
 ## Como Rodar o Projeto
 
-pnpm
+pnpm start
 
 ## Funcionalidades
 
