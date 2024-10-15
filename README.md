@@ -35,8 +35,8 @@ git clone https://github.com/jonasbatista-dev/toDoList.git
 
 ## Instalação
 
-cd toDoList
-pnpm install
+- cd toDoList
+- pnpm install
 
 ## Como Rodar o Projeto
 
