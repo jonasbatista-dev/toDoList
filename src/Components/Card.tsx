@@ -7,13 +7,20 @@ import { useNavigate } from 'react-router-dom';
 
 import { Draggable } from '@hello-pangea/dnd';
 
-// import { Container } from './styles';
+type tasksType = {
+  title: string;
+  order: number;
+  completed: boolean;
+  id: string;
+};
 
-const Card: React.FC<{ task: any; index: number; disabled: boolean }> = ({
-  task,
-  index,
-  disabled,
-}) => {
+interface Props {
+  task: tasksType;
+  index: number;
+  disabled?: boolean;
+}
+
+const Card: React.FC<Props> = ({ task, index, disabled }) => {
   const { deleteTask, updateTask } = useMain();
   const navigate = useNavigate();
   return (
@@ -46,7 +53,7 @@ const Card: React.FC<{ task: any; index: number; disabled: boolean }> = ({
               <Button
                 disabled={task?.completed}
                 onClick={() => {
-                  navigate(`/${task?.id}`);
+                  navigate(`/form/${task?.id}`);
                 }}
                 icon={<EditFilled />}
                 type="link"

@@ -16,7 +16,7 @@ const ListTasks: React.FC = () => {
 
   const handleData = (filter) => {
     getTasks().then((resp) => {
-      resp = resp.sort((a, b) => a.order - b.order);
+      resp = resp?.sort((a, b) => a.order - b.order);
 
       if (filter === 'pendente') {
         const data = resp?.filter((item) => !item?.completed);
@@ -49,6 +49,7 @@ const ListTasks: React.FC = () => {
     const tasks = reorder(data, result.source.index, result.destination.index);
 
     tasks?.map((item, index) => tasksOrder.push({ ...item, order: index + 1 }));
+    setData(tasks);
     window.localStorage.setItem('tasks', JSON.stringify(tasksOrder));
     window.location.reload();
   };

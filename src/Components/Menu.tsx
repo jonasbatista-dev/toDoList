@@ -1,9 +1,7 @@
 import {
   BarChartOutlined,
-  ClearOutlined,
   CloseOutlined,
   FileAddOutlined,
-  MenuOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import './Menu.scss';
@@ -17,7 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const items = [
   {
-    key: '/',
+    key: '/form',
     icon: <FileAddOutlined />,
     label: 'Nova Tarefa',
   },

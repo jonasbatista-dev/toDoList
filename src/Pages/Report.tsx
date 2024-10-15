@@ -6,12 +6,19 @@ import { useMain } from '@/Layout/MainContext';
 import { Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 
+type tasksType = {
+  title: string;
+  order: number;
+  completed: boolean;
+  id: string;
+};
+
 const Report: React.FC = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<tasksType[]>([]);
   const { getTasks } = useMain();
 
   const handleData = () => {
-    getTasks().then((resp) => {
+    getTasks().then((resp: tasksType[]) => {
       return setData(resp);
     });
   };

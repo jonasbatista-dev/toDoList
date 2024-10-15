@@ -8,14 +8,29 @@ axios.interceptors.response.use((response) => {
   return response;
 });
 
-const MainContext = createContext<any | undefined>(undefined);
+type tasksType = {
+  title: string;
+  order: number;
+  completed: boolean;
+  id?: string;
+};
+
+interface mainContextProps {
+  getTasks: () => Promise<tasksType[]>;
+  addTask: (task: tasksType) => Promise<tasksType>;
+  updateTask: (id: string, updateTask: tasksType) => Promise<tasksType>;
+  deleteTask: (id: string) => Promise<tasksType>;
+}
+
+const MainContext = createContext<mainContextProps | undefined>(undefined);
 
 export const MainProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { message } = App.useApp();
 
-  const tasks = JSON.parse(window.localStorage.getItem('tasks')) ?? ([] as any);
+  const tasks =
+    JSON.parse(window.localStorage.getItem('tasks')) ?? ([] as tasksType[]);
 
   const getTasks = async () => {
     try {
@@ -27,11 +42,7 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const addTask = async (newTask: {
-    title: string;
-    order: number;
-    completed: boolean;
-  }) => {
+  const addTask = async (newTask: tasksType) => {
     try {
       const response = await axios.post('/tasks.json', newTask, {
         data: tasks,
@@ -47,12 +58,9 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const updateTask = async (
-    id: string,
-    updatedTask: { title: string; completed: boolean; order: number },
-  ) => {
+  const updateTask = async (id: string, updatedTask: tasksType) => {
     try {
-      await axios.put(`./tasks.json`, updatedTask, {
+      const response = await axios.put(`./tasks.json`, updatedTask, {
         data: tasks,
       });
       const newTasks = tasks.map((task) =>
@@ -60,7 +68,7 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({
       );
 
       window.localStorage.setItem('tasks', JSON.stringify(newTasks));
-      return;
+      return response.data;
     } catch (error) {
       console.error(`Erro ao atualizar a tarefa`, error);
     }

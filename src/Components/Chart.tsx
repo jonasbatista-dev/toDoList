@@ -2,8 +2,19 @@ import './Chart.scss';
 import React from 'react';
 import { ResponsiveBarCanvas } from '@nivo/bar';
 
+type tasksType = {
+  title: string;
+  order: number;
+  completed: boolean;
+  id: string;
+};
+
+interface Props {
+  tasks: tasksType[];
+}
+
 const getDataForBarChart = (
-  tasks: { title: string; order: Number; completed: boolean }[],
+  tasks: { title: string; order: number; completed: boolean }[],
 ) => {
   const completedTasks = tasks.filter((task) => task.completed).length;
   const incompleteTasks = tasks.filter((task) => !task.completed).length;
@@ -20,7 +31,7 @@ const getDataForBarChart = (
   ];
 };
 
-const MyBarChart: React.FC<{ tasks: any }> = ({ tasks }) => {
+const MyBarChart: React.FC<Props> = ({ tasks }) => {
   const data = getDataForBarChart(tasks);
 
   return (

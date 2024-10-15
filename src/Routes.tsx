@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AddTasks from '@/Pages/Tasks/Add';
 import ListTasks from '@/Pages/Tasks/List';
 import Report from '@/Pages/Report';
@@ -9,9 +9,10 @@ import Report from '@/Pages/Report';
 const RoutesMain: React.FC = () => {
   return (
     <Routes>
-      <Route path="/:id?" element={<AddTasks />} />
+      <Route path="/form/:id?" element={<AddTasks />} />
       <Route path="/list" element={<ListTasks />} />
       <Route path="/report" element={<Report />} />
+      <Route path="/" element={<Navigate to={'/list'} />} />
     </Routes>
   );
 };
