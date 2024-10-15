@@ -29,7 +29,7 @@ Certifique-se de ter o Node.js e o npm (ou yarn, ou pnpm) instalados em sua máq
 Para baixar o projeto, você pode usar o Git:
 
 ```bash
-git clone https://github.com/seu-usuario/todo-list.git
+git clone https://github.com/jonasbatista-dev/toDoList.git
 
 ```
 
