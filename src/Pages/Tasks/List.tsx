@@ -1,7 +1,7 @@
 import Card from '@/Components/Card';
 import Content from '@/Components/Content';
 import PageHeader from '@/Components/PageHeader';
-import { useMain } from '@/Layout/MainContext';
+import { useService } from '@/Api/ApiServiceContext';
 import { CheckOutlined } from '@ant-design/icons';
 
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 
 const ListTasks: React.FC = () => {
   const [data, setData] = useState([]);
-  const { getTasks } = useMain();
+  const { getTasks } = useService();
   const [filter, setFilter] = useState('all');
 
   const handleData = (filter) => {

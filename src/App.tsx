@@ -4,14 +4,17 @@ import { ThemeProvider } from '@/Layout/ThemeContext';
 import './App.scss';
 
 import Main from '@/Layout/Main';
+import { ServiceProvider } from '@/Api/ApiServiceContext';
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <Router>
-        <Main />
-      </Router>
-    </ThemeProvider>
+    <ServiceProvider>
+      <ThemeProvider>
+        <Router>
+          <Main />
+        </Router>
+      </ThemeProvider>
+    </ServiceProvider>
   );
 };
 

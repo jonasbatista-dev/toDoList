@@ -1,5 +1,5 @@
 import './Card.scss';
-import { useMain } from '@/Layout/MainContext';
+import { useService } from '@/Api/ApiServiceContext';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { Button, Checkbox, Col, Row } from 'antd';
 import React from 'react';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ task, index, disabled }) => {
-  const { deleteTask, updateTask } = useMain();
+  const { deleteTask, updateTask } = useService();
   const navigate = useNavigate();
   return (
     <Draggable isDragDisabled={disabled} index={index} draggableId={task?.id}>
@@ -30,7 +30,7 @@ const Card: React.FC<Props> = ({ task, index, disabled }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="card"
+          className={`card ${!disabled && 'move'}`}
         >
           <Row wrap={false} align={'middle'} gutter={[16, 20]}>
             <Col>

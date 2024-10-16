@@ -1,7 +1,7 @@
 import Chart from '@/Components/Chart';
 import Content from '@/Components/Content';
 import PageHeader from '@/Components/PageHeader';
-import { useMain } from '@/Layout/MainContext';
+import { useService } from '@/Api/ApiServiceContext';
 
 import { Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -15,7 +15,7 @@ type tasksType = {
 
 const Report: React.FC = () => {
   const [data, setData] = useState<tasksType[]>([]);
-  const { getTasks } = useMain();
+  const { getTasks } = useService();
 
   const handleData = () => {
     getTasks().then((resp: tasksType[]) => {

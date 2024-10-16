@@ -12,6 +12,9 @@
     }
   }
 
+  &.move {
+    cursor: move;
+  }
 
   .completed {
     text-decoration: line-through;

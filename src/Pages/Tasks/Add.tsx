@@ -1,13 +1,13 @@
 import Content from '@/Components/Content';
 import PageHeader from '@/Components/PageHeader';
-import { useMain } from '@/Layout/MainContext';
+import { useService } from '@/Api/ApiServiceContext';
 import { Button, Col, Form, Input, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const AddTasks: React.FC = () => {
-  const { addTask, getTasks, updateTask } = useMain();
+  const { addTask, getTasks, updateTask } = useService();
   const [form] = useForm();
 
   const { id } = useParams<{ id?: string }>();

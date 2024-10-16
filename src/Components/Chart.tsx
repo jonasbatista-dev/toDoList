@@ -34,16 +34,28 @@ const getDataForBarChart = (
 const MyBarChart: React.FC<Props> = ({ tasks }) => {
   const data = getDataForBarChart(tasks);
 
+  const getPercentage = (count: number) =>
+    ((count / tasks?.length) * 100).toFixed(2);
+
   return (
     <div className="chart">
       <ResponsiveBarCanvas
+        tooltip={({ indexValue, value }) => (
+          <div className="tooltip">
+            <strong>{indexValue}</strong>
+            <br />
+            {`Quantidade: ${value}`}
+            <br />
+            {`Porcentagem: ${getPercentage(value)}%`}
+          </div>
+        )}
         data={data}
         keys={['count']}
         indexBy="status"
         margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
         padding={0.3}
         colors={({ indexValue }) =>
-          indexValue === 'Feita' ? '#93D077' : '#F44E3F'
+          indexValue === 'Feita' ? '#07B87D' : '#DF4459'
         }
         borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
         axisTop={null}
@@ -60,7 +72,7 @@ const MyBarChart: React.FC<Props> = ({ tasks }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: '',
+          legend: 'Quantidade',
           legendPosition: 'middle',
           legendOffset: -40,
         }}

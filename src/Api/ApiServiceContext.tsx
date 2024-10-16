@@ -22,9 +22,9 @@ interface mainContextProps {
   deleteTask: (id: string) => Promise<tasksType>;
 }
 
-const MainContext = createContext<mainContextProps | undefined>(undefined);
+const ServiceContext = createContext<mainContextProps | undefined>(undefined);
 
-export const MainProvider: React.FC<{ children: ReactNode }> = ({
+export const ServiceProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { message } = App.useApp();
@@ -88,14 +88,16 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <MainContext.Provider value={{ getTasks, updateTask, deleteTask, addTask }}>
+    <ServiceContext.Provider
+      value={{ getTasks, updateTask, deleteTask, addTask }}
+    >
       {children}
-    </MainContext.Provider>
+    </ServiceContext.Provider>
   );
 };
 
-export const useMain = () => {
-  const context = useContext(MainContext);
+export const useService = () => {
+  const context = useContext(ServiceContext);
   if (!context) {
     throw new Error('error');
   }
