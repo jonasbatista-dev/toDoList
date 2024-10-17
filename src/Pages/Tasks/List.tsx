@@ -6,16 +6,23 @@ import { CheckOutlined } from '@ant-design/icons';
 
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 
+type tasksType = {
+  title: string;
+  order: number;
+  completed: boolean;
+  id: string;
+};
+
 const ListTasks: React.FC = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<tasksType[]>();
   const { getTasks } = useService();
   const [filter, setFilter] = useState('all');
 
   const handleData = (filter) => {
-    getTasks().then((resp) => {
+    getTasks().then((resp: tasksType[]) => {
       resp = resp?.sort((a, b) => a.order - b.order);
 
       if (filter === 'pendente') {
@@ -114,7 +121,7 @@ const ListTasks: React.FC = () => {
             <Droppable droppableId={'tasks'} type="list" direction="vertical">
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
-                  {data?.length && (
+                  {data?.length ? (
                     <>
                       {data?.map((item, index) => {
                         return (
@@ -127,6 +134,14 @@ const ListTasks: React.FC = () => {
                         );
                       })}
                     </>
+                  ) : (
+                    <div className="card">
+                      <Row>
+                        <Col>
+                          <Typography.Text>Nada encontrado...</Typography.Text>
+                        </Col>
+                      </Row>
+                    </div>
                   )}
                   {provided.placeholder}
                 </div>

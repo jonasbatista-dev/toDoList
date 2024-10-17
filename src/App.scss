@@ -13,6 +13,10 @@
     position: relative;
   }
 
+  .ant-empty-description {
+    color: #707070;
+  }
+
   &.light {
     background-color: #ffffff;
     color: #000000;
@@ -37,7 +41,7 @@
   .openMenu {
     position: absolute;
     left: 30px;
-    top: 30px;
+    top: 35px;
     z-index: 999;
     display: none;
     color: #000;
@@ -46,6 +50,7 @@
   @media (max-width: 960px) {
     .openMenu {
       display: block;
+
 
       &.none {
         display: none;

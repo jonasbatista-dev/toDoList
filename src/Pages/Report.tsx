@@ -3,7 +3,7 @@ import Content from '@/Components/Content';
 import PageHeader from '@/Components/PageHeader';
 import { useService } from '@/Api/ApiServiceContext';
 
-import { Col, Row } from 'antd';
+import { Col, Empty, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 type tasksType = {
@@ -25,7 +25,6 @@ const Report: React.FC = () => {
 
   useEffect(() => {
     handleData();
-    console.log(data);
   }, []);
   return (
     <>
@@ -33,7 +32,11 @@ const Report: React.FC = () => {
       <Content type="chart">
         <Row align={'middle'} gutter={[16, 20]}>
           <Col span={24}>
-            <Chart tasks={data} />
+            {data?.length ? (
+              <Chart tasks={data} />
+            ) : (
+              <Empty description="Sem dados! Cadastre novas tarefas." />
+            )}
           </Col>
         </Row>
       </Content>

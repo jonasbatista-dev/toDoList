@@ -16,7 +16,7 @@ type tasksType = {
 
 interface Props {
   task: tasksType;
-  index: number;
+  index?: number;
   disabled?: boolean;
 }
 
