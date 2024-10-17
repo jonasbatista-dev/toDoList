@@ -1,5 +1,5 @@
 import './Card.scss';
-import { useService } from '@/Api/ApiServiceContext';
+import { useService } from '../../Api/ApiServiceContext';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { Button, Checkbox, Col, Row } from 'antd';
 import React from 'react';

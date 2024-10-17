@@ -1,7 +1,7 @@
-import Card from '@/Components/Card';
-import Content from '@/Components/Content';
-import PageHeader from '@/Components/PageHeader';
-import { useService } from '@/Api/ApiServiceContext';
+import Card from '../../Components/Card';
+import Content from '../../Components/Content';
+import PageHeader from '../../Components/PageHeader';
+import { useService } from '../../Api/ApiServiceContext';
 import { CheckOutlined } from '@ant-design/icons';
 
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
@@ -23,18 +23,21 @@ const ListTasks: React.FC = () => {
 
   const handleData = (filter) => {
     getTasks().then((resp: tasksType[]) => {
-      resp = resp?.sort((a, b) => a.order - b.order);
+      let sortResult = [] as tasksType[];
+      if (resp.length) {
+        sortResult = resp?.sort((a, b) => a.order - b.order);
+      }
 
       if (filter === 'pendente') {
-        const data = resp?.filter((item) => !item?.completed);
+        const data = sortResult?.filter((item) => !item?.completed);
         return setData(data);
       }
       if (filter === 'completed') {
-        const data = resp?.filter((item) => item?.completed);
+        const data = sortResult?.filter((item) => item?.completed);
         return setData(data);
       }
 
-      return setData(resp);
+      return setData(sortResult);
     });
   };
 

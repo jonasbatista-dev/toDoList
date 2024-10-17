@@ -10,7 +10,7 @@ import { ConfigProvider, theme as antdTheme } from 'antd';
 type Theme = 'light' | 'dark';
 
 interface ThemeContextProps {
-  theme: Theme;
+  theme: 'light' | 'dark';
   toggleTheme: () => void;
   open: boolean;
   setOpen: (item: boolean) => void;

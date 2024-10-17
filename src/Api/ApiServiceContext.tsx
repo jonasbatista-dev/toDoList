@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext } from 'react';
 import axios from 'axios';
-import { App } from 'antd';
+
 import { v4 as uuidv4 } from 'uuid';
 
 // Simulação de API com axios
@@ -27,8 +27,6 @@ const ServiceContext = createContext<mainContextProps | undefined>(undefined);
 export const ServiceProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { message } = App.useApp();
-
   const tasks =
     JSON.parse(window.localStorage.getItem('tasks')) ?? ([] as tasksType[]);
 
@@ -38,7 +36,7 @@ export const ServiceProvider: React.FC<{ children: ReactNode }> = ({
       await response.json();
       return tasks;
     } catch (error) {
-      message.error({ content: 'Erro ao buscar tarefas' });
+      return error;
     }
   };
 
@@ -54,7 +52,7 @@ export const ServiceProvider: React.FC<{ children: ReactNode }> = ({
 
       return response.data;
     } catch (error) {
-      message.error({ content: 'Erro ao adicionar tarefa' });
+      console.error({ content: 'Erro ao adicionar tarefa' });
     }
   };
 

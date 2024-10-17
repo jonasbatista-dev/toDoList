@@ -23,6 +23,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": false,
+    //types
+    "types": ["@testing-library/jest-dom"],
+
     // paths
     "paths": {
       "@/*": ["./src/*"]

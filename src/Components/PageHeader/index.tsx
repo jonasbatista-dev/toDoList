@@ -1,20 +1,23 @@
-import { useTheme } from '@/Layout/ThemeContext';
+import { useTheme } from '../Layout/ThemeContext';
 import './PageHeader.scss';
-import { PageHeader as Header, PageHeaderProps } from '@ant-design/pro-layout';
-import { Switch } from 'antd';
+
+import { Layout, Switch } from 'antd';
 import { MoonOutlined, SunOutlined } from '@ant-design/icons';
 
-const PageHeader: React.FC<PageHeaderProps> = ({ ...props }) => {
+const {} = Layout;
+
+const PageHeader: React.FC<{ title: string }> = ({ title, ...props }) => {
   const { toggleTheme } = useTheme();
   return (
     <>
-      <Header className="custom-page-header" {...props}>
+      <Layout.Header className="custom-page-header" {...props}>
+        {title}
         <Switch
           unCheckedChildren={<SunOutlined />}
           checkedChildren={<MoonOutlined />}
           onClick={toggleTheme}
         />
-      </Header>
+      </Layout.Header>
     </>
   );
 };

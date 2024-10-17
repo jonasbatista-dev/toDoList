@@ -5,6 +5,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: transparent;
+
+  color: #000;
 
   .ant-page-header-heading-title {
     font-weight: bold;
@@ -24,4 +30,11 @@
     transform: translateY(-50%);
   }
 
+}
+
+.dark {
+  .ant-layout-header {
+
+    color: #fff !important;
+  }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import AddTasks from '@/Pages/Tasks/Add';
-import ListTasks from '@/Pages/Tasks/List';
-import Report from '@/Pages/Report';
+import AddTasks from './Pages/Tasks/Add';
+import ListTasks from './Pages/Tasks/List';
+import Report from './Pages/Report';
 
 // import { Container } from './styles';
 

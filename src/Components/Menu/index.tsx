@@ -1,16 +1,16 @@
+import './Menu.scss';
+
+import React, { useEffect, useState } from 'react';
 import {
   BarChartOutlined,
   CloseOutlined,
   FileAddOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import './Menu.scss';
 
-import { useTheme } from '@/Layout/ThemeContext';
+import { useTheme } from '../../Layout/ThemeContext';
 
-import { Button, Menu as MenuAntd } from 'antd';
-import Sider from 'antd/es/layout/Sider';
-import React, { useEffect, useState } from 'react';
+import { Button, Menu as MenuAntd, Layout } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const items = [
@@ -56,12 +56,16 @@ const Menu: React.FC = () => {
   };
 
   useEffect(() => setKeys(pathname), [pathname]);
-  console.log(open);
 
   return (
     <>
-      <Sider width={open ? '100dvw' : 200} className={`Menu ${open && 'open'}`}>
-        <div className="titleMenu">To Do List</div>
+      <Layout.Sider
+        width={open ? '100dvw' : 200}
+        className={`Menu ${open && 'open'}`}
+      >
+        <div className="titleMenu">
+          <h3>To Do List</h3>
+        </div>
 
         <MenuAntd
           theme={theme === 'light' ? 'light' : 'dark'}
@@ -86,7 +90,7 @@ const Menu: React.FC = () => {
             type="link"
           />
         )}
-      </Sider>
+      </Layout.Sider>
     </>
   );
 };
