@@ -58,17 +58,16 @@ export const ServiceProvider: React.FC<{ children: ReactNode }> = ({
 
   const updateTask = async (id: string, updatedTask: tasksType) => {
     try {
-      const response = await axios.put(`./tasks.json`, updatedTask, {
-        data: tasks,
-      });
+      const resp = await axios.put(`./tasks.json`, updatedTask);
       const newTasks = tasks.map((task) =>
         task.id === id ? { ...task, ...updatedTask } : task,
       );
 
       window.localStorage.setItem('tasks', JSON.stringify(newTasks));
-      return response.data;
+      return resp.data;
     } catch (error) {
       console.error(`Erro ao atualizar a tarefa`, error);
+      throw error;
     }
   };
 

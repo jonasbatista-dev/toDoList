@@ -20,7 +20,7 @@ interface Props {
   disabled?: boolean;
 }
 
-const Card: React.FC<Props> = ({ task, index, disabled }) => {
+const Card: React.FC<Props> = ({ task, index, disabled = false }) => {
   const { deleteTask, updateTask } = useService();
   const navigate = useNavigate();
   return (
@@ -36,13 +36,15 @@ const Card: React.FC<Props> = ({ task, index, disabled }) => {
             <Col>
               <Checkbox
                 checked={task?.completed ? true : false}
-                onChange={() => {
-                  updateTask(task?.id, {
-                    ...task,
+                onChange={async () => {
+                  await updateTask(task.id, {
+                    title: task.title,
+                    id: task.id,
+                    order: task.order,
                     completed: task?.completed ? false : true,
-                  }).then(() => {
-                    window.location.reload();
                   });
+
+                  window.location.reload();
                 }}
               />
             </Col>
