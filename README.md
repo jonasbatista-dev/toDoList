@@ -10,6 +10,7 @@ Um simples aplicativo de To-Do List construído com Reactjs.
 - [Instalação](#como-instalar)
 - [Como Rodar o Projeto](#como-rodar-o-projeto)
 - [Funcionalidades](#funcionalidades)
+- [Testes](#testes)
 
 ## Tecnologias Utilizadas
 
@@ -49,3 +50,7 @@ git clone https://github.com/jonasbatista-dev/toDoList.git
 - Edição e Exclusão de Tarefas
 - Ordenação das Tarefas.
 - Relatórios com índices por Status.
+
+## Testes
+
+- pnpm test
