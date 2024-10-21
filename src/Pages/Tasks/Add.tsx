@@ -3,13 +3,14 @@ import PageHeader from '../../Components/PageHeader';
 import { useService } from '../../Api/ApiServiceContext';
 import { App, Button, Col, Form, Input, Row } from 'antd';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const AddTasks: React.FC = () => {
   const { addTask, getTasks, updateTask } = useService();
   const [form] = Form.useForm();
   const { message } = App.useApp();
+  const [submitting, setSubmitting] = useState(false);
 
   const { id } = useParams<{ id?: string }>();
 
@@ -26,6 +27,7 @@ const AddTasks: React.FC = () => {
   }, [id]);
 
   const onFinish = async ({ title, order }) => {
+    setSubmitting(true);
     try {
       (await id)
         ? updateTask(id, { title, order: Number(order), completed: false })
@@ -61,7 +63,12 @@ const AddTasks: React.FC = () => {
               </Form.Item>
             </Col>
             <Col md={8} lg={4} span={24}>
-              <Button size="large" htmlType="submit" type="primary">
+              <Button
+                loading={submitting}
+                size="large"
+                htmlType="submit"
+                type="primary"
+              >
                 Salvar
               </Button>
             </Col>

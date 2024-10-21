@@ -3,7 +3,7 @@ import Content from '../Components/Content';
 import PageHeader from '../Components/PageHeader';
 import { useService } from '../Api/ApiServiceContext';
 
-import { Col, Empty, Row } from 'antd';
+import { App, Col, Empty, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 type tasksType = {
@@ -16,11 +16,14 @@ type tasksType = {
 const Report: React.FC = () => {
   const [data, setData] = useState<tasksType[]>([]);
   const { getTasks } = useService();
+  const { message } = App.useApp();
 
   const handleData = () => {
-    getTasks().then((resp: tasksType[]) => {
-      return setData(resp);
-    });
+    getTasks()
+      .then((resp: tasksType[]) => {
+        return setData(resp);
+      })
+      .catch(() => message.error({ content: 'Houve um erro inesperado.' }));
   };
 
   useEffect(() => {

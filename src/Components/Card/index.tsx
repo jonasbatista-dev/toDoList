@@ -1,7 +1,7 @@
 import './Card.scss';
 import { useService } from '../../Api/ApiServiceContext';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
-import { Button, Checkbox, Col, Row } from 'antd';
+import { Button, Checkbox, Col, message, Row } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,14 +37,18 @@ const Card: React.FC<Props> = ({ task, index, disabled = false }) => {
               <Checkbox
                 checked={task?.completed ? true : false}
                 onChange={async () => {
-                  await updateTask(task.id, {
-                    title: task.title,
-                    id: task.id,
-                    order: task.order,
-                    completed: task?.completed ? false : true,
-                  });
+                  try {
+                    await updateTask(task.id, {
+                      title: task.title,
+                      id: task.id,
+                      order: task.order,
+                      completed: task?.completed ? false : true,
+                    });
 
-                  window.location.reload();
+                    window.location.reload();
+                  } catch (error) {
+                    message.error({ content: 'Houve um erro inesperado.' });
+                  }
                 }}
               />
             </Col>
@@ -64,9 +68,13 @@ const Card: React.FC<Props> = ({ task, index, disabled = false }) => {
             <Col>
               <Button
                 disabled={task?.completed}
-                onClick={() => {
-                  window.location.reload();
-                  deleteTask(task?.id);
+                onClick={async () => {
+                  try {
+                    await deleteTask(task?.id);
+                    window.location.reload();
+                  } catch (error) {
+                    message.error({ content: 'Houve um erro inesperado.' });
+                  }
                 }}
                 icon={<DeleteFilled />}
                 type="link"

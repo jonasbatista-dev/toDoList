@@ -6,7 +6,7 @@ import { CheckOutlined } from '@ant-design/icons';
 
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 
-import { Button, Col, Row, Typography } from 'antd';
+import { App, Button, Col, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 type tasksType = {
@@ -20,25 +20,28 @@ const ListTasks: React.FC = () => {
   const [data, setData] = useState<tasksType[]>();
   const { getTasks } = useService();
   const [filter, setFilter] = useState('all');
+  const { message } = App.useApp();
 
   const handleData = (filter) => {
-    getTasks().then((resp: tasksType[]) => {
-      let sortResult = [] as tasksType[];
-      if (resp.length) {
-        sortResult = resp?.sort((a, b) => a.order - b.order);
-      }
+    getTasks()
+      .then((resp: tasksType[]) => {
+        let sortResult = [] as tasksType[];
+        if (resp.length) {
+          sortResult = resp?.sort((a, b) => a.order - b.order);
+        }
 
-      if (filter === 'pendente') {
-        const data = sortResult?.filter((item) => !item?.completed);
-        return setData(data);
-      }
-      if (filter === 'completed') {
-        const data = sortResult?.filter((item) => item?.completed);
-        return setData(data);
-      }
+        if (filter === 'pendente') {
+          const data = sortResult?.filter((item) => !item?.completed);
+          return setData(data);
+        }
+        if (filter === 'completed') {
+          const data = sortResult?.filter((item) => item?.completed);
+          return setData(data);
+        }
 
-      return setData(sortResult);
-    });
+        return setData(sortResult);
+      })
+      .catch(() => message.error({ content: 'Houve um erro inesperado.' }));
   };
 
   useEffect(() => {
